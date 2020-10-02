@@ -1,5 +1,4 @@
 import Config.ServerConfig;
-import Properties.PropertiesReader;
 import WebDriverFactory.WebDriverFactory;
 import org.aeonbits.owner.ConfigFactory;
 import org.apache.logging.log4j.LogManager;
@@ -8,21 +7,23 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
-import org.junit.Assert;
 
-import java.io.IOException;
+import static org.junit.Assert.assertEquals;
 
 
 public class OtusWebFactoryDriverTest {
-    private static WebDriver driver;
+    private WebDriver driver;
     private Logger logger = LogManager.getLogger(OtusWebFactoryDriverTest.class);
-    private ServerConfig cfg = ConfigFactory.create(ServerConfig.class);
-    PropertiesReader propertiesReader = new PropertiesReader();
+    private ServerConfig cfg = ConfigFactory.create(ServerConfig.class,
+                                                    System.getProperties(),
+                                                    System.getenv());
+
 
     @Before
-    public void setUp() throws IOException {
-        String browserName = propertiesReader.readProperties();
-        driver = WebDriverFactory.create(browserName);
+    public void setUp() {
+        String browser = cfg.getBrowser();
+        logger.info(browser);
+        driver = WebDriverFactory.create(browser);
         logger.info("Драйвер поднят");
     }
 
@@ -33,7 +34,7 @@ public class OtusWebFactoryDriverTest {
         logger.info("Открыта страница отус");
         driver.manage().window().maximize();
         logger.info("Развернуто на полный экран");
-        Assert.assertEquals("Онлайн‑курсы для профессионалов, дистанционное обучение современным профессиям", driver.getTitle());
+        assertEquals("Онлайн‑курсы для профессионалов, дистанционное обучение современным профессиям", driver.getTitle());
     }
 
     @After

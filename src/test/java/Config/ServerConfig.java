@@ -6,5 +6,6 @@ import org.aeonbits.owner.Config.Sources;
 @Sources("classpath:config.properties")
 public interface ServerConfig extends Config {
     @Key("url") String url();
-    @Key("browser") String browser();
+
+    @DefaultValue("${browser}") String getBrowser();
 }
