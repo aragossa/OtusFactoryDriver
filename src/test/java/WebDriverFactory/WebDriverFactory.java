@@ -25,7 +25,7 @@ public class WebDriverFactory {
                 ChromeOptions options = new ChromeOptions();
                 options.addArguments("--headless");
                 WebDriverManager.chromedriver().setup();
-                return new ChromeDriver();
+                return new ChromeDriver(options);
             } else if (browserName.equalsIgnoreCase(Browser.FIREFOX.toString())) {
                 WebDriverManager.firefoxdriver().setup();
                 return new FirefoxDriver();
