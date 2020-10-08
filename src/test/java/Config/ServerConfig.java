@@ -7,5 +7,7 @@ import org.aeonbits.owner.Config.Sources;
 public interface ServerConfig extends Config {
     @Key("url") String url();
 
-    @DefaultValue("${browser}") String getBrowser();
+//    @DefaultValue("${browser}") String getBrowser();
+    @DefaultValue("chrome")
+    @Key("browser") String browser();
 }

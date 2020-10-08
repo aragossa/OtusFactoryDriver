@@ -21,7 +21,7 @@ public class OtusWebFactoryDriverTest {
 
     @Before
     public void setUp() {
-        String browser = cfg.getBrowser();
+        String browser = cfg.browser();
         logger.info(browser);
         driver = WebDriverFactory.create(browser);
         logger.info("Драйвер поднят");
